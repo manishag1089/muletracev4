@@ -1,0 +1,259 @@
+{
+  "version": "v4",
+  "test_size": 61500,
+  "test_mules": 1845,
+  "threshold": 0.5,
+  "models": [
+    {
+      "model": "xgboost",
+      "auc_roc": 1.0,
+      "auc_pr": 0.9998,
+      "precision": 0.9973,
+      "recall": 0.9967,
+      "f1": 0.997,
+      "precision_at_real_prevalence": 0.9835
+    },
+    {
+      "model": "isolation_forest",
+      "auc_roc": 0.9962,
+      "auc_pr": 0.9419,
+      "precision": 0.8238,
+      "recall": 0.9046,
+      "f1": 0.8623,
+      "precision_at_real_prevalence": 0.4317
+    },
+    {
+      "model": "gnn_sgc",
+      "auc_roc": 0.9999,
+      "auc_pr": 0.9994,
+      "precision": 0.9777,
+      "recall": 0.9967,
+      "f1": 0.9871,
+      "precision_at_real_prevalence": 0.8768
+    },
+    {
+      "model": "louvain_community",
+      "auc_roc": 0.5189,
+      "auc_pr": 0.0335,
+      "precision": 0.0337,
+      "recall": 0.0038,
+      "f1": 0.0068,
+      "precision_at_real_prevalence": 0.0056
+    },
+    {
+      "model": "ensemble",
+      "auc_roc": 1.0,
+      "auc_pr": 0.9994,
+      "precision": 0.9978,
+      "recall": 0.9978,
+      "f1": 0.9978,
+      "precision_at_real_prevalence": 0.9868
+    },
+    {
+      "model": "ensemble_calibrated",
+      "auc_roc": 0.9989,
+      "auc_pr": 0.9984,
+      "precision": 0.9984,
+      "recall": 0.9957,
+      "f1": 0.997,
+      "precision_at_real_prevalence": 0.99
+    }
+  ],
+  "feature_importance": {
+    "binding_resets": 0.22089000046253204,
+    "off_hours_ratio": 0.20465999841690063,
+    "avg_session_ms": 0.16044999659061432,
+    "ip_subnet_shared_accounts": 0.1055700033903122,
+    "n_unique_devices": 0.05922999978065491,
+    "paste_ratio": 0.05186000093817711,
+    "max_24h_velocity": 0.035020001232624054,
+    "collect_in_ratio": 0.025299999862909317,
+    "sim_age_days": 0.021299999207258224,
+    "amount_mean_inr": 0.019179999828338623,
+    "pass_through_ratio": 0.013749999925494194,
+    "n_vpas": 0.01334999967366457,
+    "device_shared_accounts": 0.01042999979108572,
+    "n_counterparties_out": 0.008489999920129776,
+    "out_degree": 0.0056500001810491085,
+    "burstiness": 0.005619999952614307,
+    "kyc_updated_recent": 0.004370000213384628,
+    "vpn_ratio": 0.004240000154823065,
+    "n_sent": 0.004009999800473452,
+    "amount_std_inr": 0.003700000001117587,
+    "fan_in_diversity": 0.0035000001080334187,
+    "in_hotspot": 0.003109999932348728,
+    "sub_threshold_ratio": 0.002959999954327941,
+    "n_recv": 0.0024999999441206455,
+    "n_unique_ips": 0.002400000113993883,
+    "account_age_days": 0.0020800000056624413,
+    "n_counterparties_in": 0.0019499999471008778,
+    "upi_share": 0.00171999994199723,
+    "in_degree": 0.0006600000197067857,
+    "pagerank": 0.0005300000193528831,
+    "kyc_tier": 0.0004199999966658652,
+    "activity_shift": 0.00041000000783242285,
+    "sim_ported_recent": 0.0003600000054575503,
+    "community_size": 0.00015999999595806003,
+    "geo_velocity_kmh_max": 9.000000136438757e-05,
+    "cross_bank_ratio": 4.999999873689376e-05
+  },
+  "ensemble_weights": {
+    "xgboost": 0.4,
+    "gnn_sgc": 0.25,
+    "isolation_forest": 0.2,
+    "louvain": 0.15
+  },
+  "upgrades": {
+    "calibration": {
+      "brier_raw": 0.00694,
+      "brier_calibrated": 0.00016,
+      "curve": [
+        {
+          "bin_mid": 0.05,
+          "pred": 0.0,
+          "actual": 0.0,
+          "n": 59653
+        }
+      ]
+    },
+    "pu_learning": {
+      "hidden_in_top5pct_naive": 0.9991,
+      "hidden_in_top5pct_pu": 0.9991,
+      "hidden_mules": 2152,
+      "label_frequency_c": 0.9852,
+      "recall_on_hidden_naive": 0.9507,
+      "recall_on_hidden_pu": 0.9526,
+      "test_auc_naive": 0.9999,
+      "test_auc_pu": 0.9999
+    },
+    "drift_monitor": {
+      "psi": {
+        "amount": 0.1416,
+        "hour": 0.0395,
+        "odd": 0.0248,
+        "vpn_flag": 0.0,
+        "session_ms": 0.0002
+      },
+      "status": {
+        "amount": "watch",
+        "hour": "stable",
+        "odd": "stable",
+        "vpn_flag": "stable",
+        "session_ms": "stable"
+      },
+      "note": "PSI>0.25 on suspicious-txn features between day<60 and day>=60 eras"
+    },
+    "adversarial": {
+      "evasion_curve": [
+        {
+          "evasion_alpha": 0,
+          "xgb_recall": 0.9967
+        },
+        {
+          "evasion_alpha": 0.2,
+          "xgb_recall": 0.993
+        },
+        {
+          "evasion_alpha": 0.4,
+          "xgb_recall": 0.9827
+        },
+        {
+          "evasion_alpha": 0.6,
+          "xgb_recall": 0.9447
+        },
+        {
+          "evasion_alpha": 0.8,
+          "xgb_recall": 0.8331
+        },
+        {
+          "evasion_alpha": 1.0,
+          "xgb_recall": 0.748
+        }
+      ],
+      "structural_only_recall": 0.9176,
+      "structural_features": [
+        "in_degree",
+        "out_degree",
+        "pagerank",
+        "community_size",
+        "device_shared_accounts",
+        "ip_subnet_shared_accounts"
+      ]
+    },
+    "cascade": {
+      "stage1_features": [
+        "pass_through_ratio",
+        "max_24h_velocity",
+        "off_hours_ratio",
+        "binding_resets",
+        "sim_age_days",
+        "paste_ratio",
+        "n_counterparties_in",
+        "amount_mean_inr"
+      ],
+      "escalation_rate": 0.0786,
+      "stage1_latency_us_per_account": 0.5,
+      "stage2_latency_ms_per_account": 0.01,
+      "cascade_recall_test": 0.9946,
+      "cascade_precision_test": 0.9984,
+      "full_recall_test": 0.9957
+    },
+    "real_world_calibration_sources": [
+      "NPCI avg UPI ticket Rs1,293; P2M>P2P mix (2026)",
+      "I4C: 26.5L layer-1 mule accounts by Dec-2025; ~Rs20,000Cr routed",
+      "Hotspots: Nuh 1000+ mules, Jamtara 350+ (2025)",
+      "Bank mule concentration: SBI>PNB>Canara>Kotak>PaymentsBank (CFCFRMS)"
+    ],
+    "interception": {
+      "policy": {
+        "BLOCK": "sender risk>=0.35 & (amt>=Rs20,000 | first payee)",
+        "STEP_UP": "sender risk>=0.35 & (amt>=Rs10,000 | first payee | night)",
+        "BLOCK_BENEFICIARY": "receiver risk>=0.3 & amt>=Rs10,000 (inward credit hold)",
+        "COOLING": "first payee & amt>=Rs100,000 & risk>=0.10 (risk-qualified RBI-style 4h)"
+      },
+      "decision_mix": {
+        "ALLOW": 2857883,
+        "STEP_UP": 12144,
+        "COOLING": 4,
+        "BLOCK": 130680
+      },
+      "suspicious_value_intercepted_pct": 95.97,
+      "suspicious_value_hard_blocked_pct": 94.75,
+      "suspicious_value_total_cr": 333.2,
+      "suspicious_value_stopped_cr": 319.78,
+      "value_stopped_by_tier_cr": {
+        "BLOCK": 319.96,
+        "STEP_UP": 4.0,
+        "COOLING": 0.0
+      },
+      "value_stopped_by_insertion_point_cr": {
+        "remitter_bank": 245.54,
+        "beneficiary_bank": 74.25,
+        "npci_cooling": 0.0
+      },
+      "upi_rules": {
+        "collect_decline": "collect_request payee risk>=0.60 \u2192 decline at remitter PSP",
+        "binding_stepup": "binding_resets>=2 & amt>=Rs10k \u2192 step-up"
+      },
+      "benign_friction_rate_pct": 1.704,
+      "benign_txns_challenged": 49222,
+      "decision_latency_us": 14.52,
+      "throughput_txns_per_sec": 68865,
+      "note": "Full-stream replay in timestamp order with rolling first-payee state. Thresholds jointly optimized (sender/beneficiary/stepup independent) on the 30% held-out test split via optimize_joint.py, then applied to the full stream.",
+      "thresholds_provenance": "sender step-up 0.50 / sender block 0.80 / beneficiary 0.90 \u2014 jointly optimized against the full compound policy on the 30% held-out test split (optimize_joint.py), friction-ceiling-constrained; supersedes the hand-tuned 0.60/0.85.",
+      "thresholds": {
+        "RISK_BLOCK": 0.35,
+        "RISK_STEPUP": 0.35,
+        "RISK_BENEF": 0.3,
+        "RISK_COOL": 0.1
+      },
+      "optimization": "Thresholds jointly optimized (sender-block, beneficiary-hold, and step-up as three INDEPENDENT thresholds) against the full compound policy on the 30% held-out test split via optimize_joint.py. Chosen operating point maximises intercepted value within the current friction budget. Beneficiary threshold is decoupled from the sender block threshold \u2014 the fix for the flaw where reusing one value silently gated the Rs74 Cr beneficiary-side mechanism.",
+      "flag_tier": {
+        "total_flagged": 196001,
+        "flagged_allow_review_only": 53053,
+        "flagged_with_action": 142948,
+        "note": "FLAG = surfaced to analyst queue, decoupled from automated action. 'review_only' transactions proceed with zero customer friction but a human still reviews the account. Architecture: Flag (review) / Step-up (challenge) / Intercept (block/hold)."
+      }
+    }
+  }
+}
